@@ -7,6 +7,7 @@ fun main(){
         print(" ")
         i++
     }
+
     val numbs = mutableListOf<Int>()
     numbs += 1
     numbs += 2
