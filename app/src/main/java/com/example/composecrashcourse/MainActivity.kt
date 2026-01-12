@@ -27,26 +27,43 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val age = ""
+
         GlobalScope.launch {
             delay(3000)
             Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
         }
-        GlobalScope.launch {
-            delay(4000)
+        GlobalScope.launch(Dispatchers.IO) {
+//            print(doNetworkCall())
+            val ans = doNetworkCall()
+            withContext(Dispatchers.Main){
+                Log.d("MainActivity", "onCreate: $ans")
+                Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+
+
+                Toast.makeText(this@MainActivity, ans, Toast.LENGTH_SHORT).show()
+            }
             Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
         }
         Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
         setContent {
             Text("hello")
         }
+    }
+
+    suspend fun doNetworkCall(): String{
+        delay(3000)
+        return "this is the data from db"
     }
 }
 
