@@ -65,5 +65,13 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
     // CameraX
+    // Core coroutines library
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.x.x")
+    // Android-specific coroutine utilities
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.x.x")
+
+    // Optional: For lifecycle-aware scopes (recommended for UI layers)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.x.x")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.x.x")
     
 }

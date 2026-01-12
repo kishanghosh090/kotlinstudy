@@ -18,7 +18,6 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -28,14 +27,25 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import java.io.File
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        GlobalScope.launch {
+            delay(3000)
+            Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+        }
+        GlobalScope.launch {
+            delay(4000)
+            Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+        }
+        Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
         setContent {
-            CameraApp() // 👈 ONLY THIS
+            Text("hello")
         }
     }
 }
