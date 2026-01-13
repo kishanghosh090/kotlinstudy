@@ -32,32 +32,54 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val age = ""
+//        val age = ""
 
-        GlobalScope.launch {
-            delay(3000)
-            Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
-        }
-        GlobalScope.launch(Dispatchers.IO) {
-//            print(doNetworkCall())
-            val ans = doNetworkCall()
-            withContext(Dispatchers.Main){
-                Log.d("MainActivity", "onCreate: $ans")
-                Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+//        GlobalScope.launch {
+//            delay(3000)
+//            Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+//        }
+//        GlobalScope.launch(Dispatchers.IO) {
+////            print(doNetworkCall())
+//            val ans = doNetworkCall()
+//            withContext(Dispatchers.Main){
+//                Log.d("MainActivity", "onCreate: $ans")
+//                Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+//
+//
+//                Toast.makeText(this@MainActivity, ans, Toast.LENGTH_SHORT).show()
+//            }
+//            Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+//        }
+//        Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
 
+        runBlocking {
+            launch(Dispatchers.IO) {
+                Log.d("MainActivity", "onCreate: Hello from coroutine-- ${Thread.currentThread().name}")
+                delay(3000)
+                Log.d("MainActivity", "onCreate: Hello from coroutine- ${Thread.currentThread().name}")
+                withContext(Dispatchers.Main){
+                    Log.d("MainActivity", "onCreate: Hello from coroutine-- ${Thread.currentThread().name}")
+                    Toast.makeText(this@MainActivity, "ans", Toast.LENGTH_SHORT).show()
 
-                Toast.makeText(this@MainActivity, ans, Toast.LENGTH_SHORT).show()
+                }
             }
             Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
+            delay(5000)
+            Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
         }
-        Log.d("MainActivity", "onCreate: Hello from coroutine ${Thread.currentThread().name}")
         setContent {
-            Text("hello")
+            Text(
+                modifier = Modifier
+                            .fillMaxSize()
+                            .padding(12.dp),
+                text = "hello"
+            )
         }
     }
 
