@@ -1,4 +1,7 @@
 package com.example.composecrashcourse.data.model
 
-class UserDto {
-}
+data class UserDto(
+    val id: Int,
+    val name: String,
+    val favTea: String
+)

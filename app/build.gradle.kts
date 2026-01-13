@@ -79,5 +79,19 @@ dependencies {
     // Optional: For lifecycle-aware scopes (recommended for UI layers)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.x.x")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.x.x")
-    
+
+
+    // Retrofit (core library)
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+
+    // Converter library (Gson is common, but Moshi or others can be used)
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+
+    // Optional: OkHttp logging interceptor for network call logging (useful for debugging)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // Optional: Kotlin Coroutines for asynchronous operations with suspend functions
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+
 }

@@ -1,5 +1,6 @@
 package com.example.composecrashcourse
 
+
 import android.Manifest
 import android.content.ContentValues
 import android.content.Context
@@ -10,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -26,17 +28,20 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import com.example.composecrashcourse.ui.users.UsersScreen
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContent {
+            MaterialTheme {
+                UsersScreen()
+            }
+        }
     }
-
-
-
-
 }
+
 
     @Composable
     fun CameraApp() {
